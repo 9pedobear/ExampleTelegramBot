@@ -4,10 +4,10 @@ from aiogram.dispatcher import Dispatcher
 from aiogram.types import ParseMode
 from aiogram.utils import executor
 from aiogram.utils.markdown import text, bold
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 tg_bot_token = '5163185542:AAG96jJfS85lftHx4F1BBozDTJBLncC1h28'
-VOICE = open('/Users/kayratsagynbekov/pythonProject/ExampleTelegramBot'
-             '/welcome-to-san-andreas.mp3', 'rb')
+
 bot = Bot(token=tg_bot_token)
 dp = Dispatcher(bot)
 
@@ -24,19 +24,11 @@ characters_names = []
 
 @dp.message_handler(commands=['start'])
 async def start_command(message: types.Message):
-    await message.answer("Rick and Morty")
+    button_hi = KeyboardButton('Привет! 👋')
+    greet_kb = ReplyKeyboardMarkup()
+    greet_kb.add(button_hi)
+    await message.answer("Rick and Morty", reply_markup=greet_kb)
 
-@dp.message_handler(commands=['help'])
-async def process_help_command(message: types.Message):
-    msg = text(bold('Я могу ответить на следующие команды:'),
-               '/voice', '/photo', '/group', '/note', '/file', '/testpre',
-               sep='\n')
-    await message.reply(msg, parse_mode=ParseMode.MARKDOWN)
-
-@dp.message_handler(commands=['voice'])
-async def process_voice_command(message: types.Message):
-    await bot.send_voice(message.from_user.id, VOICE.read(),
-                         reply_to_message_id=message.message_id)
 
 
 # for name in characters_raw:
