@@ -29,9 +29,14 @@ async def start_command(message: types.Message):
     button3 = KeyboardButton('3️⃣')
     markup4 = ReplyKeyboardMarkup().row(
         button1, button2, button3
-    )
-
-    await message.answer("Rick and Morty", reply_markup=markup4)
+    ).add(KeyboardButton('Средний ряд'))
+    button4 = KeyboardButton('4️⃣')
+    button5 = KeyboardButton('5️⃣')
+    button6 = KeyboardButton('6️⃣')
+    markup5 = ReplyKeyboardMarkup()
+    markup5.row(button4, button5)
+    markup5.insert(button6)
+    await message.answer("Rick and Morty", reply_markup=markup5)
 
 
 
