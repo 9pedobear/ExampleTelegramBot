@@ -15,5 +15,9 @@ characters_names = []
 for name in characters_raw:
     characters_names.append((name['name']))
 
-pp(characters_names)
+for id in characters_raw:
+    characters[id['id']] = id
+
+pp(characters)
+
 
