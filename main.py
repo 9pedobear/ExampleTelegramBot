@@ -11,4 +11,9 @@ next_page_url = all_data['info']['next']
 prev_page_url = all_data['info']['prev']
 characters = {}
 characters_names = []
-pp(next_page_url)
+
+for name in characters_raw:
+    characters_names.append((name['name']))
+
+pp(characters_names)
+
