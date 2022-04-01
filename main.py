@@ -24,12 +24,13 @@ characters_names = []
 
 @dp.message_handler(commands=['start'])
 async def start_command(message: types.Message):
-    markup_request = ReplyKeyboardMarkup(resize_keyboard=True).add(
-        KeyboardButton('Отправить свой контакт ☎️', request_contact=True)
-    ).add(
-        KeyboardButton('Отправить свою локацию 🗺️', request_location=True)
-    )
-    await message.answer("Rick and Morty", reply_markup=markup_request)
+    button1 = KeyboardButton('1️⃣')
+    button2 = KeyboardButton('2️⃣')
+    button3 = KeyboardButton('3️⃣')
+    markup3 = ReplyKeyboardMarkup().add(
+        button1).add(button2).add(button3)
+
+    await message.answer("Rick and Morty", reply_markup=markup3)
 
 
 
