@@ -1,5 +1,4 @@
 import requests
-from pprint import pprint as pp
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
@@ -9,7 +8,7 @@ tg_bot_token = '5163185542:AAG96jJfS85lftHx4F1BBozDTJBLncC1h28'
 bot = Bot(token=tg_bot_token)
 dp = Dispatcher(bot)
 
-page = input("Введите номер страницы: ")
+page = 1
 main_request = requests.get(f'https://rickandmortyapi.com/api/character?page'
                             f'={page}')
 
