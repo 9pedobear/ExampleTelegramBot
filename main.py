@@ -11,7 +11,6 @@ dp = Dispatcher(bot)
 page = 1
 main_request = requests.get(f'https://rickandmortyapi.com/api/character?page'
                             f'={page}')
-
 all_data = main_request.json()
 characters_raw = all_data['results']
 next_page_url = all_data['info']['next']
@@ -24,12 +23,19 @@ characters_names = []
 async def start_command(message: types.Message):
     await message.answer("Rick and Morty")
 
+@dp.message_handler(commands=['help'])
+async def process_help_command(message: types.Message):
+    await message.reply("Напиши мне что-нибудь, и я отпрпавлю этот текст тебе в ответ!")
 
-for name in characters_raw:
-    characters_names.append((name['name']))
 
-for id in characters_raw:
-    characters[id['id']] = id
+@dp.message_handler()
+async def echo_message(msg: types.Message):
+    await bot.send_message(msg.from_user.id, msg.text)
 
+
+# for name in characters_raw:
+#     characters_names.append((name['name']))
+# for id in characters_raw:
+#     characters[id['id']] = id
 
 executor.start_polling(dp)
