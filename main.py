@@ -7,5 +7,8 @@ main_request = requests.get(f'https://rickandmortyapi.com/api/character?page'
 
 all_data = main_request.json()
 characters_raw = all_data['results']
-pp(characters_raw)
-
+next_page_url = all_data['info']['next']
+prev_page_url = all_data['info']['prev']
+characters = {}
+characters_names = []
+pp(next_page_url)
