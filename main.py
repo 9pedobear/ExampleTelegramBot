@@ -25,7 +25,7 @@ characters_names = []
 @dp.message_handler(commands=['start'])
 async def start_command(message: types.Message):
     button_hi = KeyboardButton('Привет! 👋')
-    greet_kb = ReplyKeyboardMarkup(resize_keyboard=True).add(button_hi)
+    greet_kb = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True).add(button_hi)
     greet_kb.add(button_hi)
     await message.answer("Rick and Morty", reply_markup=greet_kb)
 
