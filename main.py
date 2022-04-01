@@ -6,7 +6,8 @@ from aiogram.utils import executor
 from aiogram.utils.markdown import text, bold
 
 tg_bot_token = '5163185542:AAG96jJfS85lftHx4F1BBozDTJBLncC1h28'
-
+VOICE = open('/Users/kayratsagynbekov/pythonProject/ExampleTelegramBot'
+             '/welcome-to-san-andreas.mp3', 'rb')
 bot = Bot(token=tg_bot_token)
 dp = Dispatcher(bot)
 
@@ -31,6 +32,11 @@ async def process_help_command(message: types.Message):
                '/voice', '/photo', '/group', '/note', '/file', '/testpre',
                sep='\n')
     await message.reply(msg, parse_mode=ParseMode.MARKDOWN)
+
+@dp.message_handler(commands=['voice'])
+async def process_voice_command(message: types.Message):
+    await bot.send_voice(message.from_user.id, VOICE.read(),
+                         reply_to_message_id=message.message_id)
 
 
 # for name in characters_raw:
