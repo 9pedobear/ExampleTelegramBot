@@ -4,7 +4,10 @@ from aiogram.dispatcher import Dispatcher
 from aiogram.types import ParseMode
 from aiogram.utils import executor
 from aiogram.utils.markdown import text, bold
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+from aiogram.types import ReplyKeyboardRemove, \
+    ReplyKeyboardMarkup, KeyboardButton, \
+    InlineKeyboardMarkup, InlineKeyboardButton
+
 
 tg_bot_token = '5163185542:AAG96jJfS85lftHx4F1BBozDTJBLncC1h28'
 
@@ -24,21 +27,15 @@ characters_names = []
 
 @dp.message_handler(commands=['start'])
 async def start_command(message: types.Message):
-    button1 = KeyboardButton('1️⃣')
-    button2 = KeyboardButton('2️⃣')
-    button3 = KeyboardButton('3️⃣')
-    markup4 = ReplyKeyboardMarkup().row(
-        button1, button2, button3
-    ).add(KeyboardButton('Средний ряд'))
-    button4 = KeyboardButton('4️⃣')
-    button5 = KeyboardButton('5️⃣')
-    button6 = KeyboardButton('6️⃣')
-    markup5 = ReplyKeyboardMarkup()
-    markup5.row(button4, button5)
-    markup5.insert(button6)
-    await message.answer("Rick and Morty", reply_markup=markup5)
+    inline_btn_1 = InlineKeyboardButton('Первая кнопка!',
+                                        callback_data='button1')
+    inline_kb1 = InlineKeyboardMarkup().add(inline_btn_1)
+    await message.answer("Rick and Morty", reply_markup=inline_kb1)
 
-
+@dp.callback_query_handler(func=lambda c: c.data == 'button1')
+async def process_callback_button1(callback_query: types.CallbackQuery):
+    await bot.answer_callback_query(callback_query.id)
+    await bot.send_message(callback_query.from_user.id, 'Нажата первая кнопка!')
 
 # for name in characters_raw:
 #     characters_names.append((name['name']))
