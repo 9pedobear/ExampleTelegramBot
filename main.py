@@ -1,7 +1,9 @@
 import requests
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
+from aiogram.types import ParseMode
 from aiogram.utils import executor
+from aiogram.utils.markdown import text, bold
 
 tg_bot_token = '5163185542:AAG96jJfS85lftHx4F1BBozDTJBLncC1h28'
 
@@ -25,12 +27,10 @@ async def start_command(message: types.Message):
 
 @dp.message_handler(commands=['help'])
 async def process_help_command(message: types.Message):
-    await message.reply("Напиши мне что-нибудь, и я отпрпавлю этот текст тебе в ответ!")
-
-
-@dp.message_handler()
-async def echo_message(msg: types.Message):
-    await bot.send_message(msg.from_user.id, msg.text)
+    msg = text(bold('Я могу ответить на следующие команды:'),
+               '/voice', '/photo', '/group', '/note', '/file', '/testpre',
+               sep='\n')
+    await message.reply(msg, parse_mode=ParseMode.MARKDOWN)
 
 
 # for name in characters_raw:
